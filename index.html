@@ -186,7 +186,7 @@
 <script>
 (function () {
   const tg = window.Telegram && window.Telegram.WebApp;
-  const inTelegram = !!(tg && tg.initData);
+  const inTelegram = !!(tg && tg.platform && tg.platform !== "unknown");
 
   // ---------- Дані від бота (передаються в URL) ----------
   const DEFAULT = {
@@ -334,7 +334,7 @@
         mb.setText(`Записатися · ${price} ₴`);
         mb.show();
         ok ? mb.enable() : mb.disable();
-        try { mb.color = ok ? tg.themeParams.button_color : tg.themeParams.hint_color; } catch (e) {}
+        
       } else mb.hide();
     } else {
       $("fallbackBtn").disabled = !ok;
