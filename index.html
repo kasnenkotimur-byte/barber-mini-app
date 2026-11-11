@@ -186,7 +186,8 @@
 <script>
 (function () {
   const tg = window.Telegram && window.Telegram.WebApp;
-  const inTelegram = !!(tg && tg.platform && tg.platform !== "unknown");
+  const inTelegram = !!(tg && (tg.initData || (tg.platform && tg.platform !== "unknown") ||
+    /tgWebApp/.test(location.hash) || window.TelegramWebviewProxy || window.parent !== window));
 
   // ---------- Дані від бота (передаються в URL) ----------
   const DEFAULT = {
